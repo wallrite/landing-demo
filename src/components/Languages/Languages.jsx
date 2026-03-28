@@ -9,11 +9,11 @@ export default function Languages() {
     <section id="languages" className={styles.section} ref={ref}>
       <div className={styles.inner}>
         <div className={`${styles.header} reveal`}>
-          <span className={styles.eyebrow}>30+ Languages</span>
+          <span className={styles.eyebrow}>4 Languages</span>
           <h2 className={styles.title}>Find Your Language</h2>
           <p className={styles.desc}>
-            From the world's most spoken languages to niche gems — our expert tutors
-            and curated curricula cover them all.
+            English, Spanish, German, and Ukrainian — taught by certified native speakers
+            with curricula built for every level from A1 to C2.
           </p>
         </div>
 
@@ -35,10 +35,6 @@ export default function Languages() {
           ))}
         </div>
 
-        <p className={`${styles.more} reveal`}>
-          Plus 20+ more languages including Hindi, Turkish, Dutch, Polish, Swedish, and Vietnamese.
-          <a href="#pricing"> Browse all →</a>
-        </p>
       </div>
     </section>
   )

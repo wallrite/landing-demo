@@ -5,7 +5,7 @@ export default [
     monthlyPrice: 0,
     description: 'Perfect for exploring language learning.',
     features: [
-      '2 languages',
+      '1 language',
       '30 min AI practice / day',
       'Basic vocabulary builder',
       'Community access',
@@ -20,7 +20,7 @@ export default [
     monthlyPrice: 29,
     description: 'For serious learners who want results.',
     features: [
-      'Unlimited languages',
+      'All 4 languages',
       'Unlimited AI practice',
       'Advanced grammar engine',
       '4 live tutor sessions / month',

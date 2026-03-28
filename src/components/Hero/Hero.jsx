@@ -2,7 +2,7 @@ import styles from './Hero.module.css'
 
 const STATS = [
   { value: '50K+',  label: 'Active Students'  },
-  { value: '30+',   label: 'Languages'         },
+  { value: '4',     label: 'Languages'          },
   { value: '4.9★',  label: 'Average Rating'    },
   { value: '95%',   label: 'Success Rate'      },
 ]
@@ -26,7 +26,7 @@ export default function Hero() {
 
         <p className={styles.sub}>
           Live tutors, AI-powered drills, and a global community — everything you need
-          to go from zero to fluent in record time. 30+ languages, any level.
+          to go from zero to fluent in record time. English, Spanish, German, and Ukrainian.
         </p>
 
         <div className={styles.ctas}>
