@@ -1,0 +1,202 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 35%, #0e7490 100%);
+  padding: calc(var(--nav-height) + 4rem) 1.5rem 6rem;
+  text-align: center;
+}
+
+.blob1,
+.blob2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.blob1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #818CF8, #4F46E5);
+  top: -150px;
+  right: -100px;
+}
+
+.blob2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #06B6D4, #0891B2);
+  bottom: -100px;
+  left: -80px;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+  backdrop-filter: blur(4px);
+}
+
+.badgeDot {
+  width: 7px;
+  height: 7px;
+  background: #34D399;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(52, 211, 153, 0.1); }
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.gradient {
+  background: linear-gradient(90deg, #A5B4FC, #67E8F9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 580px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.75;
+}
+
+.ctas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.btnGhost:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.statsBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.stat {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .statsBar {
+    flex-direction: row;
+  }
+
+  .stat {
+    min-width: 50%;
+  }
+
+  .stat:nth-child(2) {
+    border-right: none;
+  }
+
+  .stat:nth-child(3) {
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
