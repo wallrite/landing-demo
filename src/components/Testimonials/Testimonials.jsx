@@ -1,5 +1,6 @@
 import { useReveal } from '../../hooks/useReveal'
-import testimonials from '../../data/testimonials'
+import { useTranslation } from '../../context/LanguageContext'
+import testimonialsData from '../../data/testimonials'
 import styles from './Testimonials.module.css'
 
 function Stars({ rating }) {
@@ -16,41 +17,44 @@ function Stars({ rating }) {
 
 export default function Testimonials() {
   const ref = useReveal()
+  const { t } = useTranslation()
+  const { eyebrow, title, desc, items } = t.testimonials
 
   return (
     <section id="testimonials" className={styles.section} ref={ref}>
       <div className={styles.inner}>
         <div className={`${styles.header} reveal`}>
-          <span className={styles.eyebrow}>Student Stories</span>
-          <h2 className={styles.title}>Real People, Real Results</h2>
-          <p className={styles.desc}>
-            Thousands of learners have transformed their lives through language. Here's what they say.
-          </p>
+          <span className={styles.eyebrow}>{eyebrow}</span>
+          <h2 className={styles.title}>{title}</h2>
+          <p className={styles.desc}>{desc}</p>
         </div>
 
         <div className={styles.masonry}>
-          {testimonials.map((t, i) => (
-            <article
-              key={t.id}
-              className={`${styles.card} reveal reveal-delay-${(i % 3) + 1}`}
-            >
-              <Stars rating={t.rating} />
-              <blockquote className={styles.quote}>"{t.quote}"</blockquote>
-              <div className={styles.author}>
-                <div
-                  className={styles.avatar}
-                  style={{ background: t.color }}
-                  aria-hidden="true"
-                >
-                  {t.initials}
+          {testimonialsData.map((item, i) => {
+            const tt = items[i]
+            return (
+              <article
+                key={item.id}
+                className={`${styles.card} reveal reveal-delay-${(i % 3) + 1}`}
+              >
+                <Stars rating={item.rating} />
+                <blockquote className={styles.quote}>"{tt.quote}"</blockquote>
+                <div className={styles.author}>
+                  <div
+                    className={styles.avatar}
+                    style={{ background: item.color }}
+                    aria-hidden="true"
+                  >
+                    {item.initials}
+                  </div>
+                  <div className={styles.authorInfo}>
+                    <p className={styles.authorName}>{item.name}</p>
+                    <p className={styles.authorMeta}>{tt.language} · {tt.location}</p>
+                  </div>
                 </div>
-                <div className={styles.authorInfo}>
-                  <p className={styles.authorName}>{t.name}</p>
-                  <p className={styles.authorMeta}>{t.language} · {t.location}</p>
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>

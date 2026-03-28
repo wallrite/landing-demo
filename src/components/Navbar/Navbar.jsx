@@ -1,20 +1,28 @@
 import { useState, useEffect } from 'react'
 import { useScrollSpy } from '../../hooks/useScrollSpy'
+import { useTranslation } from '../../context/LanguageContext'
 import styles from './Navbar.module.css'
-
-const NAV_LINKS = [
-  { label: 'Features',     href: '#features'     },
-  { label: 'Languages',    href: '#languages'    },
-  { label: 'Pricing',      href: '#pricing'      },
-  { label: 'Testimonials', href: '#testimonials' },
-]
 
 const SECTION_IDS = ['features', 'languages', 'pricing', 'testimonials']
 
+const LANGS = [
+  { code: 'en', flag: '🇬🇧', label: 'EN' },
+  { code: 'es', flag: '🇪🇸', label: 'ES' },
+  { code: 'uk', flag: '🇺🇦', label: 'UK' },
+]
+
 export default function Navbar() {
-  const [scrolled, setScrolled]   = useState(false)
-  const [menuOpen, setMenuOpen]   = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const activeId = useScrollSpy(SECTION_IDS)
+  const { lang, setLang, t } = useTranslation()
+
+  const NAV_LINKS = [
+    { label: t.nav.features,     href: '#features'     },
+    { label: t.nav.languages,    href: '#languages'    },
+    { label: t.nav.pricing,      href: '#pricing'      },
+    { label: t.nav.testimonials, href: '#testimonials' },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -45,11 +53,39 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+          <li className={styles.mobileLangSwitcher}>
+            {LANGS.map(({ code, flag, label }) => (
+              <button
+                key={code}
+                className={`${styles.langBtn} ${lang === code ? styles.langBtnActive : ''}`}
+                onClick={() => { setLang(code); setMenuOpen(false) }}
+                aria-label={`Switch language to ${label}`}
+              >
+                <span>{flag}</span>
+                <span>{label}</span>
+              </button>
+            ))}
+          </li>
         </ul>
 
+        <div className={styles.langSwitcher} aria-label="Language selector">
+          {LANGS.map(({ code, flag, label }) => (
+            <button
+              key={code}
+              className={`${styles.langBtn} ${lang === code ? styles.langBtnActive : ''}`}
+              onClick={() => setLang(code)}
+              aria-label={`Switch language to ${label}`}
+              aria-pressed={lang === code}
+            >
+              <span>{flag}</span>
+              <span className={styles.langLabel}>{label}</span>
+            </button>
+          ))}
+        </div>
+
         <div className={styles.actions}>
-          <a href="#pricing" className={styles.btnOutline}>Sign In</a>
-          <a href="#pricing" className={styles.btnPrimary}>Start Free</a>
+          <a href="#pricing" className={styles.btnOutline}>{t.nav.signIn}</a>
+          <a href="#pricing" className={styles.btnPrimary}>{t.nav.startFree}</a>
         </div>
 
         <button

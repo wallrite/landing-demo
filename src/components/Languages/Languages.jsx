@@ -1,20 +1,20 @@
 import { useReveal } from '../../hooks/useReveal'
+import { useTranslation } from '../../context/LanguageContext'
 import languages from '../../data/languages'
 import styles from './Languages.module.css'
 
 export default function Languages() {
   const ref = useReveal()
+  const { t } = useTranslation()
+  const { eyebrow, title, desc, students, levels, startLink, names } = t.languages
 
   return (
     <section id="languages" className={styles.section} ref={ref}>
       <div className={styles.inner}>
         <div className={`${styles.header} reveal`}>
-          <span className={styles.eyebrow}>4 Languages</span>
-          <h2 className={styles.title}>Find Your Language</h2>
-          <p className={styles.desc}>
-            English, Spanish, German, and Ukrainian — taught by certified native speakers
-            with curricula built for every level from A1 to C2.
-          </p>
+          <span className={styles.eyebrow}>{eyebrow}</span>
+          <h2 className={styles.title}>{title}</h2>
+          <p className={styles.desc}>{desc}</p>
         </div>
 
         <div className={styles.grid}>
@@ -25,16 +25,15 @@ export default function Languages() {
             >
               <span className={styles.flag}>{lang.flag}</span>
               <div className={styles.info}>
-                <h3 className={styles.langName}>{lang.name}</h3>
-                <p className={styles.langMeta}>{lang.students} students · {lang.levels} levels</p>
+                <h3 className={styles.langName}>{names[lang.id]}</h3>
+                <p className={styles.langMeta}>{lang.students} {students} · {lang.levels} {levels}</p>
               </div>
               <a href="#pricing" className={styles.startLink}>
-                Start →
+                {startLink}
               </a>
             </article>
           ))}
         </div>
-
       </div>
     </section>
   )

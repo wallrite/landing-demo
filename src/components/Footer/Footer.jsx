@@ -1,11 +1,5 @@
+import { useTranslation } from '../../context/LanguageContext'
 import styles from './Footer.module.css'
-
-const LINKS = {
-  Product: ['Features', 'Languages', 'Pricing', 'Mobile App', 'API'],
-  Learn:   ['Blog', 'Grammar Guides', 'Culture Tips', 'Podcast', 'YouTube'],
-  Company: ['About Us', 'Careers', 'Press', 'Partners', 'Contact'],
-  Legal:   ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Accessibility'],
-}
 
 const SOCIALS = [
   {
@@ -47,6 +41,9 @@ const SOCIALS = [
 ]
 
 export default function Footer() {
+  const { t } = useTranslation()
+  const { tagline, columns, copy, legal } = t.footer
+
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -59,9 +56,7 @@ export default function Footer() {
               </svg>
               <span>LinguaFlow</span>
             </a>
-            <p className={styles.tagline}>
-              The fastest path to fluency. Learn from native speakers, practice with AI, connect with the world.
-            </p>
+            <p className={styles.tagline}>{tagline}</p>
             <div className={styles.socials}>
               {SOCIALS.map(s => (
                 <a key={s.label} href={s.href} className={styles.socialIcon} aria-label={s.label}>
@@ -71,7 +66,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {Object.entries(LINKS).map(([col, items]) => (
+          {Object.entries(columns).map(([col, items]) => (
             <div key={col} className={styles.col}>
               <h4 className={styles.colTitle}>{col}</h4>
               <ul className={styles.colLinks}>
@@ -86,11 +81,11 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <p className={styles.copy}>© {new Date().getFullYear()} LinguaFlow, Inc. All rights reserved.</p>
+          <p className={styles.copy}>{copy(new Date().getFullYear())}</p>
           <div className={styles.bottomLinks}>
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Cookies</a>
+            {legal.map(label => (
+              <a key={label} href="#">{label}</a>
+            ))}
           </div>
         </div>
       </div>

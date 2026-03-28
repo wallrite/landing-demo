@@ -1,5 +1,6 @@
 import { useReveal } from '../../hooks/useReveal'
-import features from '../../data/features'
+import { useTranslation } from '../../context/LanguageContext'
+import featuresData from '../../data/features'
 import styles from './Features.module.css'
 
 const ICONS = {
@@ -42,21 +43,20 @@ const ICONS = {
 
 export default function Features() {
   const ref = useReveal()
+  const { t } = useTranslation()
+  const { eyebrow, title, desc, items } = t.features
 
   return (
     <section id="features" className={styles.section} ref={ref}>
       <div className={styles.inner}>
         <div className={`${styles.header} reveal`}>
-          <span className={styles.eyebrow}>Why LinguaFlow</span>
-          <h2 className={styles.title}>Everything You Need to Become Fluent</h2>
-          <p className={styles.desc}>
-            We combine the best of human teaching with cutting-edge technology so
-            learning a language actually sticks — and stays fun.
-          </p>
+          <span className={styles.eyebrow}>{eyebrow}</span>
+          <h2 className={styles.title}>{title}</h2>
+          <p className={styles.desc}>{desc}</p>
         </div>
 
         <div className={styles.grid}>
-          {features.map((f, i) => (
+          {featuresData.map((f, i) => (
             <article
               key={f.id}
               className={`${styles.card} reveal reveal-delay-${(i % 3) + 1}`}
@@ -64,8 +64,8 @@ export default function Features() {
               <div className={styles.iconWrap}>
                 {ICONS[f.icon]}
               </div>
-              <h3 className={styles.cardTitle}>{f.title}</h3>
-              <p className={styles.cardDesc}>{f.description}</p>
+              <h3 className={styles.cardTitle}>{items[i].title}</h3>
+              <p className={styles.cardDesc}>{items[i].description}</p>
             </article>
           ))}
         </div>
