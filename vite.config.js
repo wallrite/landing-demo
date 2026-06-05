@@ -3,9 +3,9 @@ import react from '@vitejs/plugin-react'
 
 import { cloudflare } from "@cloudflare/vite-plugin";
 
-// Cloudflare Pages sets CF_PAGES=1 in its build environment; serve from root there.
-// GitHub Pages serves the site under /landing-demo/, so keep that as the default.
-const base = process.env.CF_PAGES ? '/' : '/landing-demo/'
+// GitHub Pages serves the site under /landing-demo/; the workflow sets GH_PAGES=1.
+// Everywhere else (Cloudflare Workers/Pages, local dev) serves from the root.
+const base = process.env.GH_PAGES ? '/landing-demo/' : '/'
 
 export default defineConfig({
   plugins: [react(), cloudflare()],
