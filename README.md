@@ -46,6 +46,17 @@ python3 deploy.py --preview
 > base: '/your-repo-name/',
 > ```
 
+### Cloudflare Pages
+
+1. In the Cloudflare dashboard, create a Pages project and connect this repo.
+2. Set the build configuration:
+   - **Framework preset:** Vite (or None)
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+3. Set environment variable **`NODE_VERSION=24`** (the repo's `.nvmrc` is also honored on newer Pages builds, but the env var is the reliable lever).
+
+No further config is needed: `vite.config.js` detects Cloudflare's `CF_PAGES=1` build variable and serves assets from `/` instead of `/landing-demo/`.
+
 ### Python deploy script
 
 Builds and pushes `dist/` to the `gh-pages` branch directly:
